@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Mime;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace HeroApp.Helper
@@ -16,12 +18,16 @@ namespace HeroApp.Helper
 
         public string EndPoint { get; set; }
 
-        public async Task<T> GetRequestAsync<T>()
+        public string BodyContent { get; set; }
+
+        public HttpMethod HttpMethod { get; set; }
+
+        public async Task<T> SendRequestAsync<T>()
         {
             try
             {
                 var endPoint = $"{this.BaseEndPoint}{this.EndPoint}"; 
-                using (var request = new HttpRequestMessage(HttpMethod.Get, endPoint))
+                using (var request = new HttpRequestMessage(this.HttpMethod, endPoint))
                 using (var client = new HttpClient())
                 {
                     request.Headers.Add("apiKey", this.ApiKey);
@@ -33,7 +39,12 @@ namespace HeroApp.Helper
                             request.Headers.Add(header.Key, header.Value);
                         }
                     }
-                   
+
+                    if(this.BodyContent != null)
+                    {
+                        request.Content = new StringContent(this.BodyContent, Encoding.UTF8, "application/json");
+                    }
+                    
                     var apiResponse = await client.SendAsync(request).ConfigureAwait(false);
 
                     if (!apiResponse.IsSuccessStatusCode)
@@ -52,5 +63,6 @@ namespace HeroApp.Helper
                 throw error;
             }
         }
+
     }
 }

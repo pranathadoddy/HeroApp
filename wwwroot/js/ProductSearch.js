@@ -7,7 +7,7 @@ ProductSearch.prototype = {
     Register: function () {
         var self = this;
 
-        $("#btn-search").off('click').on('click',
+        $("#btn-search", self.Element).off('click').on('click',
             function (e) {
                 e.preventDefault();
                 $(".result").html("Loading ...");

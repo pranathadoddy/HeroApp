@@ -1,6 +1,5 @@
 ﻿var Profile = function (element) {
     this.Element = element;
-
 };
 
 Profile.prototype = {
@@ -8,16 +7,18 @@ Profile.prototype = {
     Register: function () {
         var self = this;
 
-        $("#submit-btn").off('click').on('click',
+        $("#submit-btn", self.Element).off('click').on('click',
             function (e) {
                 e.preventDefault();
                 var form = $(this).closest('form');
 
-                var data = JSON.stringify(getFormData(form));
+                var data = getFormData(form);
 
-                localStorage.setItem('userProfile', data);
-
-                window.location = form.data("redirect-url");
+                $.post(form.data("create-profile-url"), data, function (data) {
+                    localStorage.setItem('userProfile', JSON.stringify(data.response));
+                     window.location = form.data("redirect-url");
+                });
+                
             });
 
         function getFormData($form){
@@ -30,6 +31,5 @@ Profile.prototype = {
 
             return indexed_array;
         }
-
     }
 };

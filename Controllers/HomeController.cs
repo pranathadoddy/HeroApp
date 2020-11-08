@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using HeroApp.Helper;
 using HeroApp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HeroApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IWebApiManager _webApiManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IWebApiManager webApiManager)
         {
-            _logger = logger;
+            this._webApiManager = webApiManager;
         }
 
         public IActionResult Index()
@@ -36,15 +35,15 @@ namespace HeroApp.Controllers
             return View(model);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> CreateProfile(CreateProfileModel model)
         {
-            return View();
-        }
+            this._webApiManager.HttpMethod = HttpMethod.Post;
+            this._webApiManager.BodyContent = JsonConvert.SerializeObject(model);
+            this._webApiManager.EndPoint = "pax";
+            var response = await this._webApiManager.SendRequestAsync<CreateProfileModel>();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return this.Json(new { response });
+           
         }
     }
 }

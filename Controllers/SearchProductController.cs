@@ -1,8 +1,8 @@
-﻿using DalSoft.RestClient;
-using HeroApp.Helper;
+﻿using HeroApp.Helper;
 using HeroApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace HeroApp.Controllers
@@ -25,8 +25,9 @@ namespace HeroApp.Controllers
 
         public async Task<IActionResult> ProductList(string keyword)
         {
+            this._webApiManager.HttpMethod = HttpMethod.Get;
             this._webApiManager.EndPoint = $"search?q={keyword}&lat={DefaultLat}&lng={DefaultLng}";
-            var result = await this._webApiManager.GetRequestAsync<IEnumerable<ProductVm>>();
+            var result = await this._webApiManager.SendRequestAsync<IEnumerable<ProductVm>>();
 
             return this.PartialView(result);
         }

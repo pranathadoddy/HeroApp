@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace HeroApp.Helper
@@ -9,6 +10,10 @@ namespace HeroApp.Helper
 
         string EndPoint { get; set; }
 
-        Task<T> GetRequestAsync<T>();
+        string BodyContent { get; set; }
+
+        HttpMethod HttpMethod { get; set; }
+
+        Task<T> SendRequestAsync<T>();
     }
 }

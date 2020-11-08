@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HeroApp.Controllers
 {
@@ -10,6 +11,11 @@ namespace HeroApp.Controllers
         }
 
         public IActionResult ViewBookingDate()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> ViewPrice()
         {
             return View();
         }

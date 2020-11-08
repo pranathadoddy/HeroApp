@@ -7,7 +7,7 @@ ProductList.prototype = {
     Register: function () {
         var self = this;
 
-        $(".btn-select").off('click').on('click',
+        $(".btn-select", self.Element).off('click').on('click',
             function (e) {
                 e.preventDefault();
                 var button = $(this);
