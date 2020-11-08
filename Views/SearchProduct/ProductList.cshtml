@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<ProductVm>
 
 
-
 @foreach (var product in Model)
 {
     <div class="col-md-12 product-list m-t-10">
@@ -15,7 +14,7 @@
                         data-name="@product.Name" 
                         data-nights="@product.NumberOfNights" 
                         data-shortdescription="@product.ShortDescription"
-                        data-view-booking-date-url=""
+                        data-view-booking-date-url="@Url.Action("ViewBookingDate","Booking")"
                         class="btn btn-primary btn-select">Select</button>
             </div>
         </div>

@@ -31,9 +31,5 @@ namespace HeroApp.Controllers
             return this.PartialView(result);
         }
 
-        public IActionResult ViewBookingDate()
-        {
-            return this.View();
-        }
     }
 }

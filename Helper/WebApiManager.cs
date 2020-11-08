@@ -10,7 +10,7 @@ namespace HeroApp.Helper
     {
         private string BaseEndPoint = "https://staging.hero.travel/api/v2/";
 
-        private string ApiKey = "5907faba-c11b-4f12-b8bb-28fbcd5c3803";
+        private string ApiKey = "";
 
         public IDictionary<string, string> Headers { get; set; }
 
