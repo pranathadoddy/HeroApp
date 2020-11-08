@@ -15,7 +15,7 @@ Profile.prototype = {
                 var data = getFormData(form);
 
                 $.post(form.data("create-profile-url"), data, function (data) {
-                    localStorage.setItem('userProfile', JSON.stringify(data.response));
+                     localStorage.setItem('userProfile', JSON.stringify(data.response));
                      window.location = form.data("redirect-url");
                 });
                 

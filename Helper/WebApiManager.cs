@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace HeroApp.Helper
 {
@@ -26,7 +27,7 @@ namespace HeroApp.Helper
         {
             try
             {
-                var endPoint = $"{this.BaseEndPoint}{this.EndPoint}"; 
+                var endPoint =$"{this.BaseEndPoint}{this.EndPoint}"; 
                 using (var request = new HttpRequestMessage(this.HttpMethod, endPoint))
                 using (var client = new HttpClient())
                 {

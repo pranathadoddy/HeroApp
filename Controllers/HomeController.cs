@@ -35,6 +35,7 @@ namespace HeroApp.Controllers
             return View(model);
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateProfile(CreateProfileModel model)
         {
             this._webApiManager.HttpMethod = HttpMethod.Post;

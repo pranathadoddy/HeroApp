@@ -13,7 +13,7 @@
 
 <div class="col-md-6">
     <form id="form-view-booking-date"
-          data-redirect-url="@Url.Action("Index","SearchProduct")">
+          data-create-booking-url="@Url.Action("CreateBooking","Booking")">
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" readonly name="name" id="name">
@@ -22,20 +22,20 @@
             <label>Description</label>
             <textarea class="form-control" readonly name="description" id="description"></textarea>
         </div>
-        <div class="form-group">
-            <label>Date</label>
-            <input type="text" class="form-control datepicker" name="date" id="date">
-        </div>
-        <button type="submit" id="submit-btn" class="btn btn-primary">View Price</button>
+        
     </form>
 </div>
+<div id="calendar" data-event-source-url="@Url.Action("GetAvailableSchedule","Booking")">
 
-@section Styles{ 
-    <link rel="stylesheet" href="~/lib/datepicker/css/datepicker.min.css" />
+</div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/lib/fullcalendar/main.css" />
 }
 
 @section Scripts{
-    <script src="~/lib/datepicker/js/datepicker.min.js"></script>
+    <script src="~/lib/fullcalendar/main.js"></script>
+    <script src="~/lib/moment/moment.js"></script>
     <script src="~/js/BookingDate.js"></script>
     <script type="text/javascript">
         var bookingDate = new BookingDate();
