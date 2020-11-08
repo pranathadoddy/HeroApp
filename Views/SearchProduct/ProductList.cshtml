@@ -1,1 +1,24 @@
-﻿
+﻿@model IEnumerable<ProductVm>
+
+
+
+@foreach (var product in Model)
+{
+    <div class="col-md-12 product-list m-t-10">
+        <div class="row">
+            <div class="col-md-8 m-t-10">
+                <div class="col-md-12"><h5>@product.Name</h5></div>
+                <div class="col-md-12">@product.ShortDescription</div>
+            </div>
+            <div class="col-md-4 align-left m-t-10">
+                <button type="submit" id="select-btn-@product.Id" data-id="@product.Id" 
+                        data-name="@product.Name" 
+                        data-nights="@product.NumberOfNights" 
+                        data-shortdescription="@product.ShortDescription"
+                        data-view-booking-date-url=""
+                        class="btn btn-primary btn-select">Select</button>
+            </div>
+        </div>
+    </div>
+}
+    
